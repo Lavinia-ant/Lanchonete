@@ -2,13 +2,10 @@ import { use, useState } from 'react'
 import './App.css'
 import imgSorvete from './assets/sorvete.png'
 import imgFamilia from './assets/familiaSorvete.png'
+import CardProduto from './components/CardProduto'
 
 function App() {
-  const [tipoPromocao, setTipoPromocao] = useState('familia'); 
-
-  const alterarPromocao = () => {
-    setTipoPromocao(tipoPromocao === 'familia' ? 'individual' : 'familia'); 
-  }
+  const [tipoPromocao, setTipoPromocao] = useState('familia');
 
   const dadosPromocao = {
     familia: {
@@ -25,12 +22,25 @@ function App() {
     }
   }
 
+  const alterarPromocao = () => {
+    setTipoPromocao(tipoPromocao === 'familia' ? 'individual' : 'familia');
+  }
+
+  const dados = dadosPromocao[tipoPromocao]
+
   return (
     <>
-     <div className='container'>
-     <h1>Escolha a sua promoção</h1>
-     <button>Mudar promoção</button>
-     </div> 
+      <div className='container'>
+        <h1>Escolha a sua promoção</h1>
+        <button onClick={alterarPromocao}>Mudar promoção</button>
+
+        <CardProduto
+          imagem={dados.imagem}
+          titulo={dados.titulo}
+          preco={dados.preco}
+          descricao={dados.descricao}
+        />
+      </div>
     </>
   )
 }
